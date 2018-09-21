@@ -1,7 +1,7 @@
 
 # Homework 1: "P8105_hw1_jw3597"
-## Name: Jessie Wong 
-## Date: Sept 16, 2018
+#### Name: Jessie Wong 
+#### Date: Sept 16, 2018
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -81,7 +81,7 @@ plot_df
 ```
 
 Short description of the vector above: 
-The size of the data set is `r nrow(plot_df)` rows and `r ncol(plot_df)` columns. The mean is `r mean(x)`. 
+The size of the data set is `r nrow(plot_df)` rows and `r ncol(plot_df)` columns. The mean is `r mean(x)`. `r sum(`x + y > 0`, na.rm=TRUE)`   
 
 ```{r}
 ## Scatterplot of y vs x (using the logical variable)
@@ -95,4 +95,6 @@ ggplot(plot_df, aes(x = x, y = y)) + geom_point(aes(color = as.factor(as.logical
 
 ## The color scale for the first scatterplot using logical variable and the third scatterplot using factor variable consisted of two contrasting colors (red and blue) representing "true" or "false". The color scale for the second scatterplot using numeric variable, consisted of a blue gradient corresponding to values from 0.00 to 1.00.  
 ```
+
+ggsave("scatter_plot.pdf", height = 4, width = 6)
 
