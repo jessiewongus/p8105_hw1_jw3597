@@ -86,19 +86,19 @@ The size of the data set is `r nrow(plot_df)` rows and `r ncol(plot_df)` columns
 
 ```{r}
 ## Scatterplot of y vs x (using the logical variable)
-ggplot(plot_df, aes(x = x, y = y)) + geom_point(aes(color = x + y > 0))
+ggplot(plot_df, aes(x = x, y = y)) + geom_point(aes(color = sum))
 
 ## Scatterplot of y vs x (using the numeric variable)
-ggplot(plot_df, aes(x = x, y = y)) + geom_point(aes(color = as.numeric(as.logical(x + y > 0))))
+ggplot(plot_df, aes(x = x, y = y)) + geom_point(aes(color = sum1))
 
 ## Scatterplot of y vs x (using the factor variable)
-ggplot(plot_df, aes(x = x, y = y)) + geom_point(aes(color = as.factor(as.logical(x + y > 0))))
+ggplot(plot_df, aes(x = x, y = y)) + geom_point(aes(color = sum2))
 
 ## The color scale for the first scatterplot using logical variable and the third scatterplot using factor variable consisted of two contrasting colors (red and blue) representing "true" or "false". The color scale for the second scatterplot using numeric variable, consisted of a blue gradient corresponding to values from 0.00 to 1.00.  
 ```
 
 ```{r}
 ## Export first scatterplot to project directory using ggsave
-ggplot(plot_df, aes(x = x, y = y)) + geom_point(aes(color = x + y > 0))
-ggsave("scatter_plot.pdf", height = 4, width = 6)
+ggplot(plot_df, aes(x = x, y = y)) + geom_point(aes(color = sum))
+ggsave("scatter_plot1.pdf", height = 4, width = 6)
 ```
