@@ -1,21 +1,14 @@
-##################################################################
-# Sept 16, 2018
-# Jessie Wong
-#
-# Homework 1
-##################################################################
----
-title: "P8105_hw1_jw3597"
-output: html_document
----
+
+# Homework 1: "P8105_hw1_jw3597"
+## Name: Jessie Wong 
+## Date: Sept 16, 2018
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
-## Problem 1 
-
+### Problem 1 
 ```{r}
 ## A random sample of size 10 from a uniform [0,5] distribution
 x = runif(10, min = 0, max = 5)
@@ -30,16 +23,20 @@ food <- c("I", "am", "very", "hungry", "would", "you", "like", "to", "go", "eat"
 ## A (length-10) factor vector
 size <- c("Small", "Large", "Medium", "Medium", "Medium", "Large", "Small", "Large", "Large", "Medium")
 
+## Creating a data frame comprised of the variables above
 homework_df = tibble(
   vec_char = c("I", "am", "very", "hungry", "would", "you", "like", "to", "go", "eat"),
   vec_logical = c(x > 2),
   vec_factor = factor(c("Small", "Large", "Medium", "Medium", "Medium", "Large", "Small", "Large", "Large", "Medium"))
 )
+
+homework_df
 ```
+
 
 ```{r}
 ## Mean of logical vector 
-mean(x>2)
+mean(x > 2)
 
 ## Mean of character vector
 mean(food)
@@ -47,8 +44,9 @@ mean(food)
 ## Mean of factor vector
 mean(size)
 
-## Out of the 3 variables, only the logical vector was able to produce a mean (0.6).It did not work for character and factor vector because both are not in numerics.  
+## Out of the 3 variables, only the logical vector was able to produce a mean (0.6). It did not work for character and factor vector because both are not numeric or logical. 
 ```
+
 
 ```{r}
 ## Applying as.numeric function to logical, character, and factor variables
@@ -56,7 +54,7 @@ as.numeric(as.factor(size))
 
 as.numeric(as.character(food))
 
-as.numeric(as.logical(x>2))
+as.numeric(as.logical(x > 2))
 ```
 
 ```{r}
@@ -66,13 +64,12 @@ as.numeric(as.factor(food))
 ## Converting factor variable from factor to character to numeric
 as.numeric(as.character(size))
 
-## It was not possible to convert the factor variable from factor to character to numeric.
+## When I tried to convert character variable from character to factor to numeric, I was able to make the conversion and the output was numeric. However, when I tried converting factor variable from factor to character to numeric, the output was all NA.
 ```
 
-## Problem 2
-
-## `Plotting and the use of inline R code`
+### Problem 2
 ```{r}
+## Creating a data frame 
 plot_df = tibble(
   x = rnorm(1000),
   y = rnorm(1000),
@@ -80,25 +77,22 @@ plot_df = tibble(
   as.numeric(as.logical(x + y > 0)),
   as.factor(as.logical(x + y > 0))
 )
+plot_df
 ```
 
-The size of the data set is `r nrow(plot_df)` rows and `r ncol(plot_df)` columns.
-The mean is `r mean(x)`.
+Short description of the vector above: 
+The size of the data set is `r nrow(plot_df)` rows and `r ncol(plot_df)` columns. The mean is `r mean(x)`. 
 
 ```{r}
+## Scatterplot of y vs x (using the logical variable)
 ggplot(plot_df, aes(x = x, y = y)) + geom_point(aes(color = x + y > 0))
-```
 
-```{r}
+## Scatterplot of y vs x (using the numeric variable)
 ggplot(plot_df, aes(x = x, y = y)) + geom_point(aes(color = as.numeric(as.logical(x + y > 0))))
+
+## Scatterplot of y vs x (using the factor variable)
+ggplot(plot_df, aes(x = x, y = y)) + geom_point(aes(color = as.factor(as.logical(x + y > 0))))
+
+## The color scale for the first scatterplot using logical variable and the third scatterplot using factor variable consisted of two contrasting colors (red and blue) representing "true" or "false". The color scale for the second scatterplot using numeric variable, consisted of a blue gradient corresponding to values from 0.00 to 1.00.  
 ```
-
-```{r}
-ggplot(plot_df, aes(x = x, y = y)) + geom_point(aes(color = as.numeric(as.logical(x + y > 0))))
-```
-
-
-
-
-
 
