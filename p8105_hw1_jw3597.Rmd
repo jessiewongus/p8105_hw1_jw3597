@@ -47,7 +47,6 @@ mean(size)
 ## Out of the 3 variables, only the logical vector was able to produce a mean (0.6). It did not work for character and factor vector because both are not numeric or logical. 
 ```
 
-
 ```{r}
 ## Applying as.numeric function to logical, character, and factor variables
 as.numeric(as.factor(size))
@@ -73,15 +72,17 @@ as.numeric(as.character(size))
 plot_df = tibble(
   x = rnorm(1000),
   y = rnorm(1000),
-  x + y > 0,
-  as.numeric(as.logical(x + y > 0)),
-  as.factor(as.logical(x + y > 0))
+  sum = x + y > 0,
+  sum1 = as.numeric(sum),
+  sum2 = as.factor(sum)
 )
+
 plot_df
+
 ```
 
 Short description of the vector above: 
-The size of the data set is `r nrow(plot_df)` rows and `r ncol(plot_df)` columns. The mean is `r mean(x)`. `r sum(`x + y > 0`, na.rm=TRUE)`   
+The size of the data set is `r nrow(plot_df)` rows and `r ncol(plot_df)` columns. The mean is `r mean(x)`. The proportion of cases for which the logical vector is TRUE is `r sum(plot_df$sum == TRUE)/nrow(plot_df)`.
 
 ```{r}
 ## Scatterplot of y vs x (using the logical variable)
@@ -96,5 +97,8 @@ ggplot(plot_df, aes(x = x, y = y)) + geom_point(aes(color = as.factor(as.logical
 ## The color scale for the first scatterplot using logical variable and the third scatterplot using factor variable consisted of two contrasting colors (red and blue) representing "true" or "false". The color scale for the second scatterplot using numeric variable, consisted of a blue gradient corresponding to values from 0.00 to 1.00.  
 ```
 
+```{r}
+## Export first scatterplot to project directory using ggsave
+ggplot(plot_df, aes(x = x, y = y)) + geom_point(aes(color = x + y > 0))
 ggsave("scatter_plot.pdf", height = 4, width = 6)
-
+```
